@@ -2,6 +2,8 @@
 
 (Last updated: May 26, 2024)
 
+Hoi
+
 In this tutorial, we will teach you how to create a Jupyter book and deploy it online.
 This page is written in markdown, which also serves as an example.
 All the content on this website is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
@@ -11,7 +13,6 @@ This tutorial only mentions the basics.
 For more advanced usage of Jupyter Book (e.g., using this special content block, editing the configuration file `_config.yml`, editing the table of content file `_toc.yml`, etc.), check [the Jupyter Book documentation](https://jupyterbook.org/en/stable/content/index.html) for more information.
 :::
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/EaETjKmXOTo?si=uAeOYk-SXi9tKXkV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Table of contents
 - [Prerequisites](#pre)
