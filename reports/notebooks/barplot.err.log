@@ -1,0 +1,120 @@
+Traceback (most recent call last):
+  File "/home/julia/miniconda3/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/julia/miniconda3/lib/python3.12/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/julia/miniconda3/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/julia/miniconda3/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/julia/miniconda3/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/julia/miniconda3/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/julia/miniconda3/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+trace = [go.Bar(
+    x=uurloon['Peilmoment'],
+    y=hbo_bachelor['Uurloon werknemers na verlaten ho (euro)'],
+    name='Hbo-bachelor',
+    marker_color='rgb(102,194,165)',
+    hoverinfo='y+name'
+    ),
+    go.Bar(
+    x=uurloon['Peilmoment'],
+    y=hbo_master['Uurloon werknemers na verlaten ho (euro)'],
+    name='Hbo-master',
+    marker_color='rgb(252,141,98)',
+    hoverinfo='y+name'
+    ),
+    go.Bar(
+    x=uurloon['Peilmoment'],
+    y=wo_bachelor['Uurloon werknemers na verlaten ho (euro)'],
+    name='Wo-bachelor',
+    marker_color='rgb(141,160,203)',
+    hoverinfo='y+name'
+    ),
+    go.Bar(
+    x=uurloon['Peilmoment'],
+    y=wo_master['Uurloon werknemers na verlaten ho (euro)'],
+    name='Wo-master',
+    marker_color='rgb(231,138,195)',
+    hoverinfo='y+name'
+    )]
+
+layout = go.Layout(
+    title='Hourly wage after leaving university per degree',
+    height=400,
+    xaxis=go.layout.XAxis(
+        title='Benchmark',
+        type='category',
+        tickvals = uurloongem['Peilmoment'].unique(),
+        ticktext=['Directly after', '1 year after', '2 years after', '3 years after', '4 years after', '5 years after']
+    ),
+    yaxis=go.layout.YAxis(
+        title='Hourly wage',
+        tickprefix = '€', 
+        tickformat = ',.'
+    ),
+    legend=dict(
+            x=1.0,
+            y=1.0,
+            bgcolor='rgba(255, 255, 255, 0)',
+            bordercolor='rgba(255, 255, 255, 0)'
+    ),
+    barmode='group',
+    bargap=0.15,
+    bargroupgap=0.1,
+)
+
+fig = go.Figure(data=trace, layout=layout)
+fig.show()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[3], line 2[0m
+[1;32m      1[0m trace [38;5;241m=[39m [go[38;5;241m.[39mBar(
+[0;32m----> 2[0m     x[38;5;241m=[39m[43muurloon[49m[[38;5;124m'[39m[38;5;124mPeilmoment[39m[38;5;124m'[39m],
+[1;32m      3[0m     y[38;5;241m=[39mhbo_bachelor[[38;5;124m'[39m[38;5;124mUurloon werknemers na verlaten ho (euro)[39m[38;5;124m'[39m],
+[1;32m      4[0m     name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mHbo-bachelor[39m[38;5;124m'[39m,
+[1;32m      5[0m     marker_color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mrgb(102,194,165)[39m[38;5;124m'[39m,
+[1;32m      6[0m     hoverinfo[38;5;241m=[39m[38;5;124m'[39m[38;5;124my+name[39m[38;5;124m'[39m
+[1;32m      7[0m     ),
+[1;32m      8[0m     go[38;5;241m.[39mBar(
+[1;32m      9[0m     x[38;5;241m=[39muurloon[[38;5;124m'[39m[38;5;124mPeilmoment[39m[38;5;124m'[39m],
+[1;32m     10[0m     y[38;5;241m=[39mhbo_master[[38;5;124m'[39m[38;5;124mUurloon werknemers na verlaten ho (euro)[39m[38;5;124m'[39m],
+[1;32m     11[0m     name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mHbo-master[39m[38;5;124m'[39m,
+[1;32m     12[0m     marker_color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mrgb(252,141,98)[39m[38;5;124m'[39m,
+[1;32m     13[0m     hoverinfo[38;5;241m=[39m[38;5;124m'[39m[38;5;124my+name[39m[38;5;124m'[39m
+[1;32m     14[0m     ),
+[1;32m     15[0m     go[38;5;241m.[39mBar(
+[1;32m     16[0m     x[38;5;241m=[39muurloon[[38;5;124m'[39m[38;5;124mPeilmoment[39m[38;5;124m'[39m],
+[1;32m     17[0m     y[38;5;241m=[39mwo_bachelor[[38;5;124m'[39m[38;5;124mUurloon werknemers na verlaten ho (euro)[39m[38;5;124m'[39m],
+[1;32m     18[0m     name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mWo-bachelor[39m[38;5;124m'[39m,
+[1;32m     19[0m     marker_color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mrgb(141,160,203)[39m[38;5;124m'[39m,
+[1;32m     20[0m     hoverinfo[38;5;241m=[39m[38;5;124m'[39m[38;5;124my+name[39m[38;5;124m'[39m
+[1;32m     21[0m     ),
+[1;32m     22[0m     go[38;5;241m.[39mBar(
+[1;32m     23[0m     x[38;5;241m=[39muurloon[[38;5;124m'[39m[38;5;124mPeilmoment[39m[38;5;124m'[39m],
+[1;32m     24[0m     y[38;5;241m=[39mwo_master[[38;5;124m'[39m[38;5;124mUurloon werknemers na verlaten ho (euro)[39m[38;5;124m'[39m],
+[1;32m     25[0m     name[38;5;241m=[39m[38;5;124m'[39m[38;5;124mWo-master[39m[38;5;124m'[39m,
+[1;32m     26[0m     marker_color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mrgb(231,138,195)[39m[38;5;124m'[39m,
+[1;32m     27[0m     hoverinfo[38;5;241m=[39m[38;5;124m'[39m[38;5;124my+name[39m[38;5;124m'[39m
+[1;32m     28[0m     )]
+[1;32m     30[0m layout [38;5;241m=[39m go[38;5;241m.[39mLayout(
+[1;32m     31[0m     title[38;5;241m=[39m[38;5;124m'[39m[38;5;124mHourly wage after leaving university per degree[39m[38;5;124m'[39m,
+[1;32m     32[0m     height[38;5;241m=[39m[38;5;241m400[39m,
+[0;32m   (...)[0m
+[1;32m     52[0m     bargroupgap[38;5;241m=[39m[38;5;241m0.1[39m,
+[1;32m     53[0m )
+[1;32m     55[0m fig [38;5;241m=[39m go[38;5;241m.[39mFigure(data[38;5;241m=[39mtrace, layout[38;5;241m=[39mlayout)
+
+[0;31mNameError[0m: name 'uurloon' is not defined
+
