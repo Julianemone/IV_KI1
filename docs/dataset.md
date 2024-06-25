@@ -9,22 +9,36 @@ We used two datasets from CBS regarding the labor market after higher education:
 - [Higher education dropouts; labor market position after leaving education](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/85776NED/table?ts=1719254949259)
 - [Higher education graduates working as employees; hourly wage after leaving education](https://opendata.cbs.nl/statline/#/CBS/nl/dataset/83815NED/table?ts=1719254998097)
 
+## Variable descriptions
+- `Geslacht`: Discrete, nominal
+- `Persoonskenmerken`: Discrete, nominal
+- `Uitstromers ho met en zonder diploma`: Discrete, ordinal
+- `Arbeidsmarktpositie`: Discrete, ordinal
+- `Studierichting`: Discrete, nominal
+- `Peilmoment`: Discrete, interval
+- `Perioden`: Discrete, interval
+- `Bedrijfstakken (SBI 2008)`: Discrete, nominal
+- `Uurloon werknemers na verlaten ho (euro)`: Discrete, ratio
+
+
+
 ## Filtering
 We decided to filter the data directly from StatLine, as doing it through CBS open data would take very long to load. For the filtering process, we chose to exclude international students and those with unknown labor market positions. Our focus was on individuals who obtained a degree, excluding those who dropped out or failed to complete their studies. Consequently, we only included individuals with bachelor's and master's degrees.
 
-:::{Filters:}
-- Geslacht: totaal
-- Persoonskenmerken: geen internationale student
-- Perioden: 20.15/'16
-- Arbeidsmarkt positie: alles behalve totaal en onbekend
-- Uitstromers: wo/hbo bachelor, wo/hbo master
-- Studierichting: alles behalve totaal
-:::
+<div class="filters">
+<b>Filters:</b> 
+- `Geslacht`: Mannen, Vrouwen, Totaal
+- `Persoonskenmerken`: Geen internationale student
+- `Perioden`: 2015/'16
+- `Arbeidsmarktpositie`: All except total and unknown
+- `Uitstromers ho met en zonder diploma`: Wo/hbo bachelor, wo/hbo master
+- `Studierichting`: All except total </div>
 
-```python
+```sh
 # Load datasets
 arbeidsmarkt = pd.read_csv("../data/arbeidsmarkt.csv", sep=';')
 uurloon = pd.read_csv("../data/uurloon.csv", sep=';')
+uurloongem = pd.read_csv("uurloongem.csv", sep=';') # Seperate for easy access
 
 # Converting numbers in string format to numeric format
 uurloon['Uurloon werknemers na verlaten ho (euro)']  = pd.to_numeric(uurloon['Uurloon werknemers na verlaten ho (euro)'] , errors='coerce')
@@ -34,7 +48,6 @@ arbeidsmarkt['Uitstromers ho (aantal)']  = pd.to_numeric(arbeidsmarkt['Uitstrome
 arbeidsmarkt.fillna(0, inplace = True)
 ```
 
-
 ## Processing
 To gain a clearer understanding of the data, we calculated percentages instead of using absolute numbers. This approach is reflected in the two heatmaps.
 
@@ -42,7 +55,7 @@ For example, when we examined the labor market position for each degree. To prov
 
 We also aggregated and merged the data in different ways to be able to visualize differents aspects as well as to be able to calculate percentages. 
 
-```python
+```sh
 # Benchmark to be able to get general counts for students per degree and per degree subject (this is the same for every year)
 peilmoment1 = arbeidsmarkt.loc[arbeidsmarkt['Peilmoment'] == 'Direct na verlaten onderwijs']
 
