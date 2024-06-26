@@ -419,18 +419,20 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">Bedrijfstakken</span> <span class="pre">(SBI</span> <span class="pre">2008)</span></code>: Discrete, nominal</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Uurloon</span> <span class="pre">werknemers</span> <span class="pre">na</span> <span class="pre">verlaten</span> <span class="pre">ho</span> <span class="pre">(euro)</span></code>: Discrete, ratio</p></li>
 </ul>
+<p>The variables we focus on in our data story are: <code class="docutils literal notranslate"><span class="pre">Uitstromers</span> <span class="pre">ho</span> <span class="pre">met</span> <span class="pre">en</span> <span class="pre">zonder</span> <span class="pre">diploma</span></code>, <code class="docutils literal notranslate"><span class="pre">Geslacht</span></code>, <code class="docutils literal notranslate"><span class="pre">Studierichting</span></code>, <code class="docutils literal notranslate"><span class="pre">Arbeidsmarktpositie</span></code> and <code class="docutils literal notranslate"><span class="pre">Uurloon</span> <span class="pre">werknemers</span> <span class="pre">na</span> <span class="pre">verlaten</span> <span class="pre">ho</span> <span class="pre">(euro)</span></code>.</p>
 </section>
 <section id="filtering">
 <h2>Filtering<a class="headerlink" href="#filtering" title="Link to this heading">#</a></h2>
 <p>We decided to filter the data directly from StatLine, as doing it through CBS open data would take very long to load. For the filtering process, we chose to exclude international students and those with unknown labor market positions. Our focus was on individuals who obtained a degree, excluding those who dropped out or failed to complete their studies. Consequently, we only included individuals with bachelor’s and master’s degrees.</p>
-<div class="filters">
-<b>Filters:</b> 
-- `Geslacht`: Mannen, Vrouwen, Totaal
-- `Persoonskenmerken`: Geen internationale student
-- `Perioden`: 2015/'16
-- `Arbeidsmarktpositie`: All except total and unknown
-- `Uitstromers ho met en zonder diploma`: Wo/hbo bachelor, wo/hbo master
-- `Studierichting`: All except total </div>
+<p><b>Filters:</b></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Geslacht</span></code>: Mannen, Vrouwen, Totaal</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Persoonskenmerken</span></code>: Geen internationale student</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Perioden</span></code>: 2015/’16</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Arbeidsmarktpositie</span></code>: All except total and unknown</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Uitstromers</span> <span class="pre">ho</span> <span class="pre">met</span> <span class="pre">en</span> <span class="pre">zonder</span> <span class="pre">diploma</span></code>: Wo/hbo bachelor, wo/hbo master</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Studierichting</span></code>: All except total</p></li>
+</ul>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load datasets</span>
 <span class="nv">arbeidsmarkt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pd.read_csv<span class="o">(</span><span class="s2">&quot;../data/arbeidsmarkt.csv&quot;</span>,<span class="w"> </span><span class="nv">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="o">)</span>
 <span class="nv">uurloon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pd.read_csv<span class="o">(</span><span class="s2">&quot;../data/uurloon.csv&quot;</span>,<span class="w"> </span><span class="nv">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="o">)</span>
@@ -447,7 +449,7 @@ arbeidsmarkt.fillna<span class="o">(</span><span class="m">0</span>,<span class=
 </section>
 <section id="processing">
 <h2>Processing<a class="headerlink" href="#processing" title="Link to this heading">#</a></h2>
-<p>To gain a clearer understanding of the data, we calculated percentages instead of using absolute numbers. This approach is reflected in the two heatmaps.</p>
+<p>To gain a clearer understanding of the data, we calculated percentages instead of using absolute numbers. This approach is reflected in the two heatmaps and the linechart.</p>
 <p>For example, when we examined the labor market position for each degree. To provide a clearer overview, we calculated the percentage within each degree for each job market position. This makes the distribution per degree much easier to read.</p>
 <p>We also aggregated and merged the data in different ways to be able to visualize differents aspects as well as to be able to calculate percentages.</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Benchmark to be able to get general counts for students per degree and per degree subject (this is the same for every year)</span>

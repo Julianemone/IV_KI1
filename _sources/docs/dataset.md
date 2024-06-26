@@ -20,19 +20,19 @@ We used two datasets from CBS regarding the labor market after higher education:
 - `Bedrijfstakken (SBI 2008)`: Discrete, nominal
 - `Uurloon werknemers na verlaten ho (euro)`: Discrete, ratio
 
+The variables we focus on in our data story are: `Uitstromers ho met en zonder diploma`, `Geslacht`, `Studierichting`, `Arbeidsmarktpositie` and `Uurloon werknemers na verlaten ho (euro)`.
 
 
 ## Filtering
 We decided to filter the data directly from StatLine, as doing it through CBS open data would take very long to load. For the filtering process, we chose to exclude international students and those with unknown labor market positions. Our focus was on individuals who obtained a degree, excluding those who dropped out or failed to complete their studies. Consequently, we only included individuals with bachelor's and master's degrees.
 
-<div class="filters">
-<b>Filters:</b> 
+<b>Filters:</b>
 - `Geslacht`: Mannen, Vrouwen, Totaal
 - `Persoonskenmerken`: Geen internationale student
 - `Perioden`: 2015/'16
 - `Arbeidsmarktpositie`: All except total and unknown
 - `Uitstromers ho met en zonder diploma`: Wo/hbo bachelor, wo/hbo master
-- `Studierichting`: All except total </div>
+- `Studierichting`: All except total
 
 ```sh
 # Load datasets
@@ -49,11 +49,11 @@ arbeidsmarkt.fillna(0, inplace = True)
 ```
 
 ## Processing
-To gain a clearer understanding of the data, we calculated percentages instead of using absolute numbers. This approach is reflected in the two heatmaps.
+To gain a clearer understanding of the data, we calculated percentages instead of using absolute numbers. This approach is reflected in the two heatmaps and the linechart.
 
 For example, when we examined the labor market position for each degree. To provide a clearer overview, we calculated the percentage within each degree for each job market position. This makes the distribution per degree much easier to read.
 
-We also aggregated and merged the data in different ways to be able to visualize differents aspects as well as to be able to calculate percentages. 
+We also aggregated and merged the data in different ways to be able to visualize differents aspects as well as to be able to calculate percentages.
 
 ```sh
 # Benchmark to be able to get general counts for students per degree and per degree subject (this is the same for every year)
