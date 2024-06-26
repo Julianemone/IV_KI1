@@ -3,7 +3,7 @@
 
 title: Degree employment & wage analysis  # Change this to your book title.
 author: InfoVis Group M4 # Change this to your name (or your team/organization name).
-logo: extra/cap-icon.png
+logo: static/images/cap-icon.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -24,7 +24,7 @@ repository:
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
-  favicon: extra/favicon.ico
+  favicon: static/images/favicon.ico
   use_issues_button: true
   use_repository_button: true
 
