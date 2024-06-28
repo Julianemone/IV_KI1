@@ -5,4 +5,4 @@ An individual's educational background typically influences their career path. I
 
 This data story intends to investigate and discuss the perspectives that focus on the differences between these forms of education, by visualising and analysing data about the employment positions and salaries of graduates. Through this, we hope to offer answers to this debate and clear up any misjudgements and prejudices about these different education paths.
 
-[Click here to read our story](https://julianemone.github.io/IV_KI1/docs/home.html)
+[Click here to read our story](https://julianemone.github.io/IV_KI1/docs/story.html)
