@@ -63,8 +63,8 @@
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Work Distribution" href="work.html" />
-    <link rel="prev" title="The job market after university" href="home.html" />
+    <link rel="next" title="Reflection" href="reflection.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,9 +179,10 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Dataset and Preprocessing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="work.html">Work Distribution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reflection.html">Reflection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="work.html">Work Distribution</a></li>
 </ul>
 
     </div>
@@ -399,10 +400,20 @@ document.write(`
 <p>Team number: M8</p>
 <section id="data">
 <h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
-<p>We used two datasets from CBS regarding the labor market after higher education:</p>
+<p>We used two datasets from CBS regarding the labour market after higher education:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://opendata.cbs.nl/statline/#/CBS/nl/dataset/85776NED/table?ts=1719254949259">Higher education dropouts; labor market position after leaving education</a></p></li>
-<li><p><a class="reference external" href="https://opendata.cbs.nl/statline/#/CBS/nl/dataset/83815NED/table?ts=1719254998097">Higher education graduates working as employees; hourly wage after leaving education</a></p></li>
+<li><p><a class="reference external" href="https://opendata.cbs.nl/statline/#/CBS/nl/dataset/85776NED/table?ts=1719254949259">Higher education dropouts; labour market position after leaving education</a></p>
+<ul>
+<li><p>Before filtering: 4 729 725 rows, 8 columns</p></li>
+<li><p>After filtering: 2400 rows, 8 columns</p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="https://opendata.cbs.nl/statline/#/CBS/nl/dataset/83815NED/table?ts=1719254998097">Higher education graduates working as employees; hourly wage after leaving education</a></p>
+<ul>
+<li><p>Before filtering: 1 351 350 rows, 7 columns</p></li>
+<li><p>After filtering: 744  rows, 7 columns</p></li>
+</ul>
+</li>
 </ul>
 </section>
 <section id="variable-descriptions">
@@ -418,20 +429,22 @@ document.write(`
 <li><p><code class="docutils literal notranslate"><span class="pre">Bedrijfstakken</span> <span class="pre">(SBI</span> <span class="pre">2008)</span></code>: Discrete, nominal</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Uurloon</span> <span class="pre">werknemers</span> <span class="pre">na</span> <span class="pre">verlaten</span> <span class="pre">ho</span> <span class="pre">(euro)</span></code>: Discrete, ratio</p></li>
 </ul>
-<p>The variables we focus on in our data story are: <code class="docutils literal notranslate"><span class="pre">Uitstromers</span> <span class="pre">ho</span> <span class="pre">met</span> <span class="pre">en</span> <span class="pre">zonder</span> <span class="pre">diploma</span></code>, <code class="docutils literal notranslate"><span class="pre">Geslacht</span></code>, <code class="docutils literal notranslate"><span class="pre">Studierichting</span></code>, <code class="docutils literal notranslate"><span class="pre">Arbeidsmarktpositie</span></code> and <code class="docutils literal notranslate"><span class="pre">Uurloon</span> <span class="pre">werknemers</span> <span class="pre">na</span> <span class="pre">verlaten</span> <span class="pre">ho</span> <span class="pre">(euro)</span></code>.</p>
+<p>The variables we focus on in our data story are: <code class="docutils literal notranslate"><span class="pre">Uitstromers</span> <span class="pre">ho</span> <span class="pre">met</span> <span class="pre">en</span> <span class="pre">zonder</span> <span class="pre">diploma</span></code>, <code class="docutils literal notranslate"><span class="pre">Geslacht</span></code>, <code class="docutils literal notranslate"><span class="pre">Studierichting</span></code>, <code class="docutils literal notranslate"><span class="pre">Arbeidsmarktpositie</span></code> and <code class="docutils literal notranslate"><span class="pre">Uurloon</span> <span class="pre">werknemers</span> <span class="pre">na</span> <span class="pre">verlaten</span> <span class="pre">ho</span> <span class="pre">(euro)</span></code>. The ‘Uurloon’ dataset we split into three different filtered csv files to be able to access efficiently.</p>
 </section>
 <section id="filtering">
 <h2>Filtering<a class="headerlink" href="#filtering" title="Link to this heading">#</a></h2>
-<p>We decided to filter the data directly from StatLine, as doing it through CBS open data would take very long to load. For the filtering process, we chose to exclude international students and those with unknown labor market positions. Our focus was on individuals who obtained a degree, excluding those who dropped out or failed to complete their studies. Consequently, we only included individuals with bachelor’s and master’s degrees.</p>
+<p>We decided to filter the data directly from StatLine, as doing it through CBS open data would take very long to load. For the filtering process, we chose to exclude international students and those with unknown labour market positions. Our focus was on individuals who obtained a degree, excluding those who dropped out or failed to complete their studies. Consequently, we only included individuals with bachelor’s and master’s degrees.</p>
 <p><b>Filters:</b></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Geslacht</span></code>: Mannen, Vrouwen, Totaal</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Persoonskenmerken</span></code>: Geen internationale student</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Perioden</span></code>: 2015/’16</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Peilmoment</span></code>: All except ‘10 jaar na verlaten onderwijs’</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Arbeidsmarktpositie</span></code>: All except total and unknown</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Uitstromers</span> <span class="pre">ho</span> <span class="pre">met</span> <span class="pre">en</span> <span class="pre">zonder</span> <span class="pre">diploma</span></code>: Wo/hbo bachelor, wo/hbo master</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Studierichting</span></code>: All except total</p></li>
 </ul>
+<p><b>Code example:</b></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load datasets</span>
 <span class="nv">arbeidsmarkt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pd.read_csv<span class="o">(</span><span class="s2">&quot;../data/arbeidsmarkt.csv&quot;</span>,<span class="w"> </span><span class="nv">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="o">)</span>
 <span class="nv">uurloon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pd.read_csv<span class="o">(</span><span class="s2">&quot;../data/uurloon.csv&quot;</span>,<span class="w"> </span><span class="nv">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="o">)</span>
@@ -449,8 +462,8 @@ arbeidsmarkt.fillna<span class="o">(</span><span class="m">0</span>,<span class=
 <section id="processing">
 <h2>Processing<a class="headerlink" href="#processing" title="Link to this heading">#</a></h2>
 <p>To gain a clearer understanding of the data, we calculated percentages instead of using absolute numbers. This approach is reflected in the two heatmaps and the linechart.</p>
-<p>For example, when we examined the labor market position for each degree. To provide a clearer overview, we calculated the percentage within each degree for each job market position. This makes the distribution per degree much easier to read.</p>
-<p>We also aggregated and merged the data in different ways to be able to visualize differents aspects as well as to be able to calculate percentages.</p>
+<p>We also aggregated and merged the data in different ways to be able to visualise different aspects as well as to be able to calculate percentages.</p>
+<p><b>Code example:</b></p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># Benchmark to be able to get general counts for students per degree and per degree subject (this is the same for every year)</span>
 <span class="nv">peilmoment1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>arbeidsmarkt.loc<span class="o">[</span>arbeidsmarkt<span class="o">[</span><span class="s1">&#39;Peilmoment&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;Direct na verlaten onderwijs&#39;</span><span class="o">]</span>
 
@@ -513,20 +526,20 @@ arbeidsmarkt<span class="o">[</span><span class="s1">&#39;Percentage degree leve
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="home.html"
+       href="introduction.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">The job market after university</p>
+        <p class="prev-next-title">Introduction</p>
       </div>
     </a>
     <a class="right-next"
-       href="work.html"
+       href="reflection.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Work Distribution</p>
+        <p class="prev-next-title">Reflection</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
