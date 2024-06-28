@@ -380,7 +380,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-descriptions">Variable descriptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">Filtering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning">Cleaning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing">Processing</a></li>
 </ul>
             </nav>
@@ -396,7 +396,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="dataset-and-preprocessing">
 <h1>Dataset and Preprocessing<a class="headerlink" href="#dataset-and-preprocessing" title="Link to this heading">#</a></h1>
 <hr class="docutils" />
-<p>Student names: <em>Dani dos Santos Bulhão, Casper Knijnenburg, Cayran Maat and Julia de Vries</em></p>
+<p>Authors: <em>Dani dos Santos Bulhão, Casper Knijnenburg, Cayran Maat and Julia de Vries</em></p>
 <p>Team number: M8</p>
 <section id="data">
 <h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
@@ -431,10 +431,10 @@ document.write(`
 </ul>
 <p>The variables we focus on in our data story are: <code class="docutils literal notranslate"><span class="pre">Uitstromers</span> <span class="pre">ho</span> <span class="pre">met</span> <span class="pre">en</span> <span class="pre">zonder</span> <span class="pre">diploma</span></code>, <code class="docutils literal notranslate"><span class="pre">Geslacht</span></code>, <code class="docutils literal notranslate"><span class="pre">Studierichting</span></code>, <code class="docutils literal notranslate"><span class="pre">Arbeidsmarktpositie</span></code> and <code class="docutils literal notranslate"><span class="pre">Uurloon</span> <span class="pre">werknemers</span> <span class="pre">na</span> <span class="pre">verlaten</span> <span class="pre">ho</span> <span class="pre">(euro)</span></code>. The ‘Uurloon’ dataset we split into three different filtered csv files to be able to access efficiently.</p>
 </section>
-<section id="filtering">
-<h2>Filtering<a class="headerlink" href="#filtering" title="Link to this heading">#</a></h2>
-<p>We decided to filter the data directly from StatLine, as doing it through CBS open data would take very long to load. For the filtering process, we chose to exclude international students and those with unknown labour market positions. Our focus was on individuals who obtained a degree, excluding those who dropped out or failed to complete their studies. Consequently, we only included individuals with bachelor’s and master’s degrees.</p>
-<p><b>Filters:</b></p>
+<section id="cleaning">
+<h2>Cleaning<a class="headerlink" href="#cleaning" title="Link to this heading">#</a></h2>
+<p>We sourced the data directly from StatLine due to quicker access compared to CBS open data, which can be slower to load. During the filtering process, we excluded international students and those with unknown labour market positions. Our analysis focused exclusively on graduates who successfully completed their studies, specifically bachelor’s and master’s degree holders.</p>
+<p><b>Filters applied when possible:</b></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Geslacht</span></code>: Mannen, Vrouwen, Totaal</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Persoonskenmerken</span></code>: Geen internationale student</p></li>
@@ -449,6 +449,7 @@ document.write(`
 <span class="nv">arbeidsmarkt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pd.read_csv<span class="o">(</span><span class="s2">&quot;../data/arbeidsmarkt.csv&quot;</span>,<span class="w"> </span><span class="nv">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="o">)</span>
 <span class="nv">uurloon</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pd.read_csv<span class="o">(</span><span class="s2">&quot;../data/uurloon.csv&quot;</span>,<span class="w"> </span><span class="nv">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="o">)</span>
 <span class="nv">uurloongem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pd.read_csv<span class="o">(</span><span class="s2">&quot;uurloongem.csv&quot;</span>,<span class="w"> </span><span class="nv">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="o">)</span><span class="w"> </span><span class="c1"># Seperate for easy access</span>
+<span class="nv">uurloongemstudie</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pd.read_csv<span class="o">(</span><span class="s1">&#39;../data/uurloongemstudie.csv&#39;</span>,<span class="w"> </span><span class="nv">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;;&#39;</span><span class="o">)</span>
 
 <span class="c1"># Converting numbers in string format to numeric format</span>
 uurloon<span class="o">[</span><span class="s1">&#39;Uurloon werknemers na verlaten ho (euro)&#39;</span><span class="o">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span>pd.to_numeric<span class="o">(</span>uurloon<span class="o">[</span><span class="s1">&#39;Uurloon werknemers na verlaten ho (euro)&#39;</span><span class="o">]</span><span class="w"> </span>,<span class="w"> </span><span class="nv">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="o">)</span>
@@ -471,19 +472,13 @@ arbeidsmarkt.fillna<span class="o">(</span><span class="m">0</span>,<span class=
 <span class="nv">total_counts_niveau</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>peilmoment1.groupby<span class="o">(</span><span class="s1">&#39;Uitstromers ho met en zonder diploma&#39;</span><span class="o">)[</span><span class="s1">&#39;Uitstromers ho (aantal)&#39;</span><span class="o">]</span>.sum<span class="o">()</span>.reset_index<span class="o">()</span>
 total_counts_niveau.rename<span class="o">(</span><span class="nv">columns</span><span class="o">={</span><span class="s1">&#39;Uitstromers ho (aantal)&#39;</span>:<span class="w"> </span><span class="s1">&#39;Total degree level&#39;</span><span class="o">}</span>,<span class="w"> </span><span class="nv">inplace</span><span class="o">=</span>True<span class="o">)</span>
 
-<span class="c1"># Grouping to get totals per degree subject</span>
-<span class="nv">total_counts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>peilmoment1.groupby<span class="o">(</span><span class="s1">&#39;Studierichting&#39;</span><span class="o">)[</span><span class="s1">&#39;Uitstromers ho (aantal)&#39;</span><span class="o">]</span>.sum<span class="o">()</span>.reset_index<span class="o">()</span>
-total_counts.rename<span class="o">(</span><span class="nv">columns</span><span class="o">={</span><span class="s1">&#39;Uitstromers ho (aantal)&#39;</span>:<span class="w"> </span><span class="s1">&#39;Total studierichting&#39;</span><span class="o">}</span>,<span class="w"> </span><span class="nv">inplace</span><span class="o">=</span>True<span class="o">)</span>
-
 <span class="c1"># Merge totals with data</span>
 <span class="nv">arbeidsmarkt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>arbeidsmarkt.merge<span class="o">(</span>total_counts_niveau,<span class="w"> </span><span class="nv">on</span><span class="o">=</span><span class="s1">&#39;Uitstromers ho met en zonder diploma&#39;</span><span class="o">)</span>
-<span class="nv">arbeidsmarkt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>arbeidsmarkt.merge<span class="o">(</span>total_counts,<span class="w"> </span><span class="nv">on</span><span class="o">=</span><span class="s1">&#39;Studierichting&#39;</span><span class="o">)</span>
 
 <span class="c1"># Calculate percentages based on totals and merge</span>
-arbeidsmarkt<span class="o">[</span><span class="s1">&#39;Percentage studierichting&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>arbeidsmarkt<span class="o">[</span><span class="s1">&#39;Uitstromers ho (aantal)&#39;</span><span class="o">]</span><span class="w"> </span>/<span class="w"> </span>arbeidsmarkt<span class="o">[</span><span class="s1">&#39;Total studierichting&#39;</span><span class="o">]</span><span class="w"> </span>*<span class="w"> </span><span class="m">100</span>
 arbeidsmarkt<span class="o">[</span><span class="s1">&#39;Percentage degree level&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>arbeidsmarkt<span class="o">[</span><span class="s1">&#39;Uitstromers ho (aantal)&#39;</span><span class="o">]</span><span class="w"> </span>/<span class="w"> </span>arbeidsmarkt<span class="o">[</span><span class="s1">&#39;Total degree level&#39;</span><span class="o">]</span><span class="w"> </span>*<span class="w"> </span><span class="m">100</span>
 
-<span class="c1"># Create seperate table per year</span>
+<span class="c1"># Create seperate table per year to create seperate traces</span>
 <span class="nv">arbeidsmarktp0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>arbeidsmarkt.loc<span class="o">[</span>arbeidsmarkt<span class="o">[</span><span class="s1">&#39;Peilmoment&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;Direct na verlaten onderwijs&#39;</span><span class="o">]</span>
 <span class="nv">arbeidsmarktp1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>arbeidsmarkt.loc<span class="o">[</span>arbeidsmarkt<span class="o">[</span><span class="s1">&#39;Peilmoment&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;1 jaar na verlaten onderwijs&#39;</span><span class="o">]</span>
 <span class="nv">arbeidsmarktp2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>arbeidsmarkt.loc<span class="o">[</span>arbeidsmarkt<span class="o">[</span><span class="s1">&#39;Peilmoment&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;2 jaar na verlaten onderwijs&#39;</span><span class="o">]</span>
@@ -561,7 +556,7 @@ arbeidsmarkt<span class="o">[</span><span class="s1">&#39;Percentage degree leve
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-descriptions">Variable descriptions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">Filtering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning">Cleaning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing">Processing</a></li>
 </ul>
   </nav></div>

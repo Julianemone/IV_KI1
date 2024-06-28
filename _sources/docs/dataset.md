@@ -1,6 +1,6 @@
 # Dataset and Preprocessing
 ---
-Student names: *Dani dos Santos Bulhão, Casper Knijnenburg, Cayran Maat and Julia de Vries*
+Authors: *Dani dos Santos Bulhão, Casper Knijnenburg, Cayran Maat and Julia de Vries*
 
 Team number: M8
 
@@ -27,10 +27,10 @@ We used two datasets from CBS regarding the labour market after higher education
 The variables we focus on in our data story are: `Uitstromers ho met en zonder diploma`, `Geslacht`, `Studierichting`, `Arbeidsmarktpositie` and `Uurloon werknemers na verlaten ho (euro)`. The 'Uurloon' dataset we split into three different filtered csv files to be able to access efficiently.
 
 
-## Filtering
-We decided to filter the data directly from StatLine, as doing it through CBS open data would take very long to load. For the filtering process, we chose to exclude international students and those with unknown labour market positions. Our focus was on individuals who obtained a degree, excluding those who dropped out or failed to complete their studies. Consequently, we only included individuals with bachelor's and master's degrees.
+## Cleaning
+We sourced the data directly from StatLine due to quicker access compared to CBS open data, which can be slower to load. During the filtering process, we excluded international students and those with unknown labour market positions. Our analysis focused exclusively on graduates who successfully completed their studies, specifically bachelor's and master's degree holders.
 
-<b>Filters:</b>
+<b>Filters applied when possible:</b>
 - `Geslacht`: Mannen, Vrouwen, Totaal
 - `Persoonskenmerken`: Geen internationale student
 - `Perioden`: 2015/'16
@@ -39,6 +39,7 @@ We decided to filter the data directly from StatLine, as doing it through CBS op
 - `Uitstromers ho met en zonder diploma`: Wo/hbo bachelor, wo/hbo master
 - `Studierichting`: All except total
 
+
 <b>Code example:</b>
 
 ```sh
@@ -46,6 +47,7 @@ We decided to filter the data directly from StatLine, as doing it through CBS op
 arbeidsmarkt = pd.read_csv("../data/arbeidsmarkt.csv", sep=';')
 uurloon = pd.read_csv("../data/uurloon.csv", sep=';')
 uurloongem = pd.read_csv("uurloongem.csv", sep=';') # Seperate for easy access
+uurloongemstudie = pd.read_csv('../data/uurloongemstudie.csv', sep = ';')
 
 # Converting numbers in string format to numeric format
 uurloon['Uurloon werknemers na verlaten ho (euro)']  = pd.to_numeric(uurloon['Uurloon werknemers na verlaten ho (euro)'] , errors='coerce')
@@ -70,19 +72,13 @@ peilmoment1 = arbeidsmarkt.loc[arbeidsmarkt['Peilmoment'] == 'Direct na verlaten
 total_counts_niveau = peilmoment1.groupby('Uitstromers ho met en zonder diploma')['Uitstromers ho (aantal)'].sum().reset_index()
 total_counts_niveau.rename(columns={'Uitstromers ho (aantal)': 'Total degree level'}, inplace=True)
 
-# Grouping to get totals per degree subject
-total_counts = peilmoment1.groupby('Studierichting')['Uitstromers ho (aantal)'].sum().reset_index()
-total_counts.rename(columns={'Uitstromers ho (aantal)': 'Total studierichting'}, inplace=True)
-
 # Merge totals with data
 arbeidsmarkt = arbeidsmarkt.merge(total_counts_niveau, on='Uitstromers ho met en zonder diploma')
-arbeidsmarkt = arbeidsmarkt.merge(total_counts, on='Studierichting')
 
 # Calculate percentages based on totals and merge
-arbeidsmarkt['Percentage studierichting'] = arbeidsmarkt['Uitstromers ho (aantal)'] / arbeidsmarkt['Total studierichting'] * 100
 arbeidsmarkt['Percentage degree level'] = arbeidsmarkt['Uitstromers ho (aantal)'] / arbeidsmarkt['Total degree level'] * 100
 
-# Create seperate table per year
+# Create seperate table per year to create seperate traces
 arbeidsmarktp0 = arbeidsmarkt.loc[arbeidsmarkt['Peilmoment'] == 'Direct na verlaten onderwijs']
 arbeidsmarktp1 = arbeidsmarkt.loc[arbeidsmarkt['Peilmoment'] == '1 jaar na verlaten onderwijs']
 arbeidsmarktp2 = arbeidsmarkt.loc[arbeidsmarkt['Peilmoment'] == '2 jaar na verlaten onderwijs']
